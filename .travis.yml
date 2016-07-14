@@ -1,0 +1,40 @@
+language: php
+sudo: false
+
+cache:
+    directories:
+      - $HOME/.composer/cache
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.0
+      env: WITH_COVERAGE=true
+    - php: 7.1
+      env: LOWEST_DEPS=true
+    - php: 'nightly'
+    - php: hhvm
+  allow_failures:
+    - php: 'nightly'
+
+before_install:
+  - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
+
+env:
+  - ELEMENT_CLASS=SimpleXML
+  - ELEMENT_CLASS=DOMNode
+
+before_script:
+  #coverage
+  - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ "$WITH_COVERAGE" == "true" ]]; then travis_retry composer require --no-update --dev henrikbjorn/phpspec-code-coverage && cp phpspec.yml.coverage phpspec.yml; fi
+
+  #composer deps
+  - if [[ "LOWEST_DEPS" == "true" ]]; then travis_retry composer update --prefer-stable --prefer-lowest -o --prefer-dist; else travis_retry composer update --prefer-stable -o --prefer-dist; fi;'
+
+script: composer test
+
+after_script:
+  #coverage
+  - bash -c 'if [ "$WITH_COVERAGE" == "true" ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
+

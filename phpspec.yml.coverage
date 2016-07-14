@@ -1,0 +1,17 @@
+suites:
+    default:
+        namespace: Rs\XmlFilter
+        psr4_prefix: Rs\XmlFilter
+        spec_path: tests
+
+extensions:
+    PhpSpecCodeCoverage\CodeCoverageExtension:
+      whitelist: [src]
+      format:
+        - text
+        - clover
+        - html
+
+      output:
+        clover: coverage.xml
+        html: coverage

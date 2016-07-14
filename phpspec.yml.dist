@@ -1,0 +1,5 @@
+suites:
+    default:
+        namespace: Rs\XmlFilter
+        psr4_prefix: Rs\XmlFilter
+        spec_path: tests

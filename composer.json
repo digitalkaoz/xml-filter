@@ -1,0 +1,37 @@
+{
+    "name": "digitalkaoz/xml-filter",
+    "description": "filter data out of xml documents",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Schönthal",
+            "email": "robert.schoenthal@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4" : {"Rs\\XmlFilter\\" : "src"}
+    },
+    "autoload-dev": {
+        "psr-4" : {"spec\\Rs\\XmlFilter\\" : "tests/spec"}
+    },
+    "require": {
+        "symfony/options-resolver": "^3.1",
+        "pimple/pimple": "^3.0",
+        "symfony/yaml": "^3.1",
+        "symfony/console": "^3.1",
+        "symfony/var-dumper": "^3.1",
+        "webmozart/assert": "^1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^3.0"
+    },
+    "scripts" : {
+        "test-simplexml": "ELEMENT_CLASS=SimpleXML vendor/bin/phpspec run --ansi -vv $@",
+        "test-domnode": "ELEMENT_CLASS=DomNode vendor/bin/phpspec run --ansi -vv $@",
+        "test-all": "composer test-simplexml && composer test-domnode $@",
+        "test": "vendor/bin/phpspec run -f pretty --ansi -vv $@",
+        "coverage": "vendor/bin/phpspec run -f pretty --ansi -vv -c phpspec.yml.coverage $@",
+        "cs": "php-cs-fixer fix --allow-risky=yes",
+        "build" : "rm -rf vendor/* && composer install -q --ansi -a -o --no-dev && box --ansi -v build && composer --ansi -q update"
+    }
+}
