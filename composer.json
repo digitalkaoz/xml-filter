@@ -24,7 +24,8 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0"
+        "phpspec/phpspec": "^3.0",
+        "phpspec/prophecy" : "^1.6"
     },
     "scripts" : {
         "test-simplexml": "ELEMENT_CLASS=SimpleXML vendor/bin/phpspec run --ansi -vv $@",

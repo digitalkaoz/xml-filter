@@ -19,6 +19,7 @@ matrix:
     #- php: hhvm
   allow_failures:
     - php: 'nightly'
+    - php: 7.1
 
 before_install:
   #coverage
