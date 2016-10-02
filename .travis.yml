@@ -18,17 +18,15 @@ matrix:
     - php: 'nightly'
 
 before_install:
+  #coverage
   - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ "$WITH_COVERAGE" == "true" ]]; then travis_retry composer require --no-update --dev henrikbjorn/phpspec-code-coverage && cp phpspec.yml.coverage phpspec.yml; fi
 
 env:
   - ELEMENT_CLASS=SimpleXML
   - ELEMENT_CLASS=DOMNode
 
 before_script:
-  #coverage
-  - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
-  - if [[ "$WITH_COVERAGE" == "true" ]]; then travis_retry composer require --no-update --dev henrikbjorn/phpspec-code-coverage && cp phpspec.yml.coverage phpspec.yml; fi
-
   #composer deps
   - if [[ "LOWEST_DEPS" == "true" ]]; then travis_retry composer update --prefer-stable --prefer-lowest -o --prefer-dist; else travis_retry composer update --prefer-stable -o --prefer-dist; fi;'
 
