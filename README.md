@@ -5,6 +5,15 @@ this library lets you filter complex Data-Structures out of XML Documents into s
 * It has Support for Type-Casting, Sorting, Validation, Reference-Checking, Conditional-Inclusion, Post-Processing, Merging, Aggregating and ...
 * It is extendable (it uses Pimple behind the curtain), so you can provide your own Filter, or override nearly every part
 
+[![Build Status](https://img.shields.io/travis/digitalkaoz/xml-filter/master.svg?style=flat-square)](https://travis-ci.org/digitalkaoz/xml-filter)
+[![Dependency Status](https://img.shields.io/versioneye/d/php/digitalkaoz:xml-filter.svg?style=flat-square)](https://www.versioneye.com/php/digitalkaoz:xml-filter)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/digitalkaoz/xml-filter.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalkaoz/xml-filter/?branch=master)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/digitalkaoz/xml-filter/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalkaoz/xml-filter/?branch=master)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/1d31f014-dbbd-4c41-a64d-a4e41cdfa3a3.svg?style=flat-square)](https://insight.sensiolabs.com/projects/1d31f014-dbbd-4c41-a64d-a4e41cdfa3a3)
+[![Latest Stable Version](https://img.shields.io/packagist/v/digitalkaoz/xml-filter.svg?style=flat-square)](https://packagist.org/packages/digitalkaoz/xml-filter)
+[![Total Downloads](https://img.shields.io/packagist/dt/digitalkaoz/xml-filter.svg?style=flat-square)](https://packagist.org/packages/digitalkaoz/xml-filter)
+[![StyleCI](https://styleci.io/repos/63342748/shield)](https://styleci.io/repos/63342748)
+
 ## Installation
 
 ```
