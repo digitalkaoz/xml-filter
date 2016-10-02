@@ -15,6 +15,7 @@
         "psr-4" : {"spec\\Rs\\XmlFilter\\" : "tests/spec"}
     },
     "require": {
+        "php" : ">=7.0",
         "symfony/options-resolver": "^3.1",
         "pimple/pimple": "^3.0",
         "symfony/yaml": "^3.1",

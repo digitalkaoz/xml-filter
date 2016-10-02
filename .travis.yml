@@ -23,8 +23,9 @@ before_install:
   - if [[ "$WITH_COVERAGE" == "true" ]]; then travis_retry composer require --no-update --dev henrikbjorn/phpspec-code-coverage && cp phpspec.yml.coverage phpspec.yml; fi
 
 env:
-  - ELEMENT_CLASS=SimpleXML
-  - ELEMENT_CLASS=DOMNode
+  matrix:
+    - ELEMENT_CLASS=SimpleXML
+    - ELEMENT_CLASS=DOMNode
 
 before_script:
   #composer deps

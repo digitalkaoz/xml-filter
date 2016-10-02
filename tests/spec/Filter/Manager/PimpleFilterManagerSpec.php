@@ -39,7 +39,7 @@ class PimpleFilterManagerSpec extends ObjectBehavior
     public function it_resolves_the_options_for_a_filter()
     {
         $element = $this->createElement('<doc>foo</doc>');
-        $this[ScalarFilter::class] = new ScalarFilter($this);
+        $this[ScalarFilter::class] = new ScalarFilter($this->getWrappedObject());
 
         $this->shouldThrow(ExceptionInterface::class)->during('filter', [$element, ScalarFilter::class, []]);
     }
@@ -47,7 +47,7 @@ class PimpleFilterManagerSpec extends ObjectBehavior
     public function it_executes_a_filter()
     {
         $element = $this->createElement('<doc>foo</doc>');
-        $this[ScalarFilter::class] = new ScalarFilter($this);
+        $this[ScalarFilter::class] = new ScalarFilter($this->getWrappedObject());
 
         $this->filter($element, ScalarFilter::class, ['path' => '/doc'])->shouldBe('foo');
     }
