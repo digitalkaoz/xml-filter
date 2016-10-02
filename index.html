@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Xml-filter by digitalkaoz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Xml-filter</h1>
+        <p>filter data out of an xml</p>
+
+        <p class="view"><a href="https://github.com/digitalkaoz/xml-filter">View the Project on GitHub <small>digitalkaoz/xml-filter</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/digitalkaoz/xml-filter/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/digitalkaoz/xml-filter/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/digitalkaoz/xml-filter">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="xmlfilter" class="anchor" href="#xmlfilter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>XmlFilter</h1>
+
+<p>this library lets you filter complex Data-Structures out of XML Documents into some Array Structure (nested Arrays, Maps, Strings ...).</p>
+
+<ul>
+<li>It is capable of using different XML Backends (<code>\SimpleXml*</code> or <code>\Dom*</code> or even your Own)</li>
+<li>It has Support for Type-Casting, Sorting, Validation, Reference-Checking, Conditional-Inclusion, Post-Processing, Merging, Aggregating and ...</li>
+<li>It is extendable (it uses Pimple behind the curtain), so you can provide your own Filter, or override nearly every part</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>$ composer install
+</code></pre>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<blockquote>
+<p>Given I Have the following XML Document</p>
+</blockquote>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">doc</span>&gt;
+    &lt;<span class="pl-ent">foo</span>&gt;foo&lt;/<span class="pl-ent">foo</span>&gt;
+    &lt;<span class="pl-ent">bar</span>&gt;20&lt;/<span class="pl-ent">bar</span>&gt;
+    &lt;<span class="pl-ent">bar</span>&gt;30&lt;/<span class="pl-ent">bar</span>&gt;
+    &lt;<span class="pl-ent">bar</span>&gt;10&lt;/<span class="pl-ent">bar</span>&gt;
+&lt;/<span class="pl-ent">doc</span>&gt;</pre></div>
+
+<blockquote>
+<p>When I use the following Configuration (while using the <code>Yaml</code> Loader)</p>
+</blockquote>
+
+<div class="highlight highlight-source-yaml"><pre><span class="pl-ent">Rs\XmlFilter\Filter\AggregateFilter:</span>
+    <span class="pl-ent">mappings:</span>
+        <span class="pl-ent">bazz:</span>
+            <span class="pl-ent">filter:</span> <span class="pl-s">Rs\XmlFilter\Filter\AggregateFilter</span>
+            <span class="pl-ent">mappings:</span>
+                <span class="pl-ent">foo:</span> <span class="pl-s"><span class="pl-pds">"</span>/doc/foo<span class="pl-pds">"</span></span>
+        <span class="pl-ent">bar:</span>
+            <span class="pl-ent">path:</span> <span class="pl-s"><span class="pl-pds">"</span>/doc/bar<span class="pl-pds">"</span></span>
+            <span class="pl-ent">cast:</span> <span class="pl-s"><span class="pl-pds">"</span>int<span class="pl-pds">"</span></span>
+            <span class="pl-ent">sort:</span> <span class="pl-c1">true</span>
+            <span class="pl-ent">multiple:</span> <span class="pl-c1">true</span></pre></div>
+
+<blockquote>
+<p>I want to get the following Array after filtering</p>
+</blockquote>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">[</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>bazz<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">    ],</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">10</span>, <span class="pl-c1">20</span>, <span class="pl-c1">30</span>]</span>
+<span class="pl-s1">]</span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<ul>
+<li><a href="./doc/filters.md">Filters</a></li>
+<li><a href="./doc/loaders.md">Loaders</a></li>
+<li><a href="./doc/backends.md">Backends</a></li>
+</ul>
+
+<h2>
+<a id="phar" class="anchor" href="#phar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PHAR</h2>
+
+<p>to build a phar simply run</p>
+
+<div class="highlight highlight-source-shell"><pre>$ composer build</pre></div>
+
+<h2>
+<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tests</h2>
+
+<pre><code>$ composer test-all
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/digitalkaoz">digitalkaoz</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
