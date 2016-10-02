@@ -34,5 +34,5 @@ script: composer test
 
 after_script:
   #coverage
-  - bash -c 'if [ "$WITH_COVERAGE" == "true" ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
+  - if [[ "$WITH_COVERAGE" == "true" ]]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover coverage.xml; fi
 
