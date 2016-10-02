@@ -10,8 +10,11 @@ matrix:
   include:
     - php: 7.0
       env: WITH_COVERAGE=true ELEMENT_CLASS=SimpleXML
+    - php: 7.0
+      env: LOWEST_DEPS=true
+    - php: 7.0
+      env: ELEMENT_CLASS=DOMNode
     - php: 7.1
-      env: LOWEST_DEPS=true ELEMENT_CLASS=DOMNode
     - php: 'nightly'
     #- php: hhvm
   allow_failures:

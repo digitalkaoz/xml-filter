@@ -6,7 +6,7 @@ this library lets you filter complex Data-Structures out of XML Documents into s
 * It is extendable (it uses Pimple behind the curtain), so you can provide your own Filter, or override nearly every part
 
 [![Build Status](https://img.shields.io/travis/digitalkaoz/xml-filter/master.svg?style=flat-square)](https://travis-ci.org/digitalkaoz/xml-filter)
-[![Dependency Status](https://img.shields.io/versioneye/d/php/digitalkaoz:xml-filter.svg?style=flat-square)](https://www.versioneye.com/php/digitalkaoz:xml-filter)
+[![Dependency Status](https://www.versioneye.com/user/projects/5790de4099a405000d2d6ce8/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5790de4099a405000d2d6ce8)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/digitalkaoz/xml-filter.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalkaoz/xml-filter/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/digitalkaoz/xml-filter/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalkaoz/xml-filter/?branch=master)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/1d31f014-dbbd-4c41-a64d-a4e41cdfa3a3.svg?style=flat-square)](https://insight.sensiolabs.com/projects/1d31f014-dbbd-4c41-a64d-a4e41cdfa3a3)
