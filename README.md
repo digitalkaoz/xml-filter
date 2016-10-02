@@ -60,6 +60,38 @@ Rs\XmlFilter\Filter\AggregateFilter:
 ]
 ```
 
+## Parse a RSS Feed
+
+```yml
+Rs\XmlFilter\Filter\MapFilter:
+  basePath: //channel/item
+  key: ./guid
+  value:
+    filter: Rs\XmlFilter\Filter\AggregateFilter
+    mappings:
+      title: ./title
+      link: ./link
+      category: ./category
+      date: ./pubDate
+      text:
+        filter: Rs\XmlFilter\Filter\PostFilter
+        callable: strip_tags
+        real_filter:
+          filter: Rs\XmlFilter\Filter\ScalarFilter
+          path: ./description
+```
+
+```php
+$filter = \Rs\XmlFilter\XmlFilter::create();
+
+$doc = $filter::load(file_get_contents('https://news.google.de/?output=rss'));
+$config = new \Rs\XmlFilter\Loader\YamlLoader(__DIR__ . '/rss.yml');
+
+$result = $filter->filter($doc, $config);
+
+echo json_encode($result, JSON_PRETTY_PRINT);
+```
+
 ## Usage
 
 * [Filters](./doc/filters.md)

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rs\XmlFilter\Loader;
 
 use Symfony\Component\Yaml\Yaml;
+use Webmozart\Assert\Assert;
 
 class YamlLoader extends ArrayLoader implements Loader
 {
@@ -14,6 +15,10 @@ class YamlLoader extends ArrayLoader implements Loader
             $content = file_get_contents($content);
         }
 
-        parent::__construct(Yaml::parse($content));
+        $content = Yaml::parse($content);
+
+        Assert::isArray($content, 'config could not be parsed');
+
+        parent::__construct($content);
     }
 }
