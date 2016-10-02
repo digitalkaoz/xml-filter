@@ -17,16 +17,7 @@ class XmlFilterProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-        $this->registerManager($pimple);
-
-        $pimple['xml_filter'] = function ($pimple) {
-            return new XmlFilter($pimple['filter_manager']);
-        };
-    }
-
-    private function registerManager(Container $pimple)
-    {
-        $pimple['pimple_manager'] = function ($pimple) {
+        $pimple['pimple_manager'] = function () {
             $manager = new PimpleFilterManager();
             $manager->register(new FilterServiceProvider());
 
@@ -45,6 +36,10 @@ class XmlFilterProvider implements ServiceProviderInterface
 
         $pimple['filter_manager'] = function ($pimple) {
             return $pimple['validation_manager'];
+        };
+
+        $pimple['xml_filter'] = function ($pimple) {
+            return new XmlFilter($pimple['filter_manager']);
         };
     }
 }

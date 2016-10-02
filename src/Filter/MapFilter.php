@@ -32,10 +32,10 @@ class MapFilter extends AbstractFilter implements Filter
             $results[$key] = $value;
         }
 
-        return $this->prepareResult($element, $options, $sort, $results);
+        return $this->prepareResult($options, $sort, $results);
     }
 
-    private function prepareResult(Element $element, array $options, $sort, $results): array
+    private function prepareResult(array $options, $sort, array $results) : array
     {
         if ($sort) {
             asort($sort);
@@ -56,7 +56,7 @@ class MapFilter extends AbstractFilter implements Filter
         return $results;
     }
 
-    private function getNodes(Element $element, array $options): array
+    private function getNodes(Element $element, array $options) : array
     {
         return $element->find($this->preparePath($options['basePath'], $options));
     }
@@ -75,9 +75,9 @@ class MapFilter extends AbstractFilter implements Filter
     private function getValue(Element $node, array $options, Element $element)
     {
         if (is_string($options['value'])) {
-            return $this->manager->filter($node, ScalarFilter::class, [
-                'path' => $this->preparePath($options['value'], $options),
-            ]);
+            $path = $this->preparePath($options['value'], $options);
+
+            return $this->manager->filter($node, ScalarFilter::class, ['path' => $path]);
         }
 
         return $this->findNested($node, $options, $element);

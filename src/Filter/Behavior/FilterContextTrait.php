@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rs\XmlFilter\Filter\Behavior;
 
 use Rs\XmlFilter\Document\Element;
+use Rs\XmlFilter\Document\SimpleXmlElement;
 use Rs\XmlFilter\Filter\Manager\FilterManager;
 
 trait FilterContextTrait
@@ -26,8 +27,8 @@ trait FilterContextTrait
             preg_match('/=(\.\/[^]]+)]/', $path, $matches);
             $contextPath = $matches[1] ?? null;
 
-            if ($contextPath && $contextValue = $options['context']->find($contextPath)) {
-                $contextValue = (string) $contextValue[0];
+            if ($contextPath !== null && $contextValue = $options['context']->find($contextPath)) {
+                $contextValue = $contextValue[0] instanceof SimpleXmlElement ? (string) $contextValue[0] : $contextValue[0]->wholeText;
 
                 return preg_replace('/=(\.\/[^]]+)]/', '="' . $contextValue . '"]', $path);
             }

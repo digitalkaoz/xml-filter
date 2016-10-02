@@ -9,11 +9,11 @@ matrix:
   fast_finish: true
   include:
     - php: 7.0
-      env: WITH_COVERAGE=true
+      env: WITH_COVERAGE=true ELEMENT_CLASS=SimpleXML
     - php: 7.1
-      env: LOWEST_DEPS=true
+      env: LOWEST_DEPS=true ELEMENT_CLASS=DOMNode
     - php: 'nightly'
-    - php: hhvm
+    #- php: hhvm
   allow_failures:
     - php: 'nightly'
 
@@ -21,11 +21,6 @@ before_install:
   #coverage
   - if [[ "$WITH_COVERAGE" != "true" && "$TRAVIS_PHP_VERSION" != "hhvm" && "$TRAVIS_PHP_VERSION" != "nightly" && "$TRAVIS_PHP_VERSION" != "7.1" ]]; then phpenv config-rm xdebug.ini; fi
   - if [[ "$WITH_COVERAGE" == "true" ]]; then travis_retry composer require --no-update --dev henrikbjorn/phpspec-code-coverage && cp phpspec.yml.coverage phpspec.yml; fi
-
-env:
-  matrix:
-    - ELEMENT_CLASS=SimpleXML
-    - ELEMENT_CLASS=DOMNode
 
 before_script:
   #composer deps

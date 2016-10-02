@@ -19,7 +19,9 @@ abstract class BaseDocument
     {
         Assert::resource($stream);
 
-        @rewind($stream);
+        $rewinded = @rewind($stream);
+
+        Assert::true($rewinded, 'could not rewind Stream');
 
         return $this->loadString(stream_get_contents($stream));
     }
@@ -30,7 +32,11 @@ abstract class BaseDocument
 
     public function loadSimpleXml(\SimpleXMLElement $element) : Element
     {
-        return $this->loadString($element->asXML());
+        $xmlString = $element->asXML();
+
+        Assert::string($xmlString, '\SimpleXMLElement could be converted to string');
+
+        return $this->loadString($xmlString);
     }
 
     public function load($content) : Element
