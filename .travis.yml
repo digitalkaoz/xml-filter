@@ -28,7 +28,7 @@ env:
 
 before_script:
   #composer deps
-  - if [[ "LOWEST_DEPS" == "true" ]]; then travis_retry composer update --prefer-stable --prefer-lowest -o --prefer-dist; else travis_retry composer update --prefer-stable -o --prefer-dist; fi;'
+  - if [[ "$LOWEST_DEPS" == "true" ]]; then travis_retry composer update --prefer-stable --prefer-lowest -o --prefer-dist; else travis_retry composer update --prefer-stable -o --prefer-dist; fi
 
 script: composer test
 
